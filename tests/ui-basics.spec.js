@@ -1,20 +1,12 @@
 const { test, expect } = require('@playwright/test');
 
+test('Login to rahulshettyacademy test', async ({ page }) => {
+  const userEmailInput = page.locator('[formcontrolname="userEmail"]');
+  const userPasswordInput = page.locator('[formcontrolname="userPassword"]');
+  const loginButton = page.locator('[value="Login"]');
 
-test('@Web Browser Context-Validating Error login', async ({ page }) => {
-    const userName = page.locator('#username');
-    const signIn = page.locator("#signInBtn");
-    const cardTitles = page.locator(".card-body a");
-    page.on('request', request => console.log(request.url()));
-    page.on('response', response => console.log(response.url(), response.status()));
-    await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
-    //css 
-    await userName.type("rahulshetty");
-    await page.locator("[type='password']").type("learning");
-    await signIn.click();
-    console.log(await page.locator("[style*='block']").textContent());
-    await expect(page.locator("[style*='block']")).toContainText('Incorrect');
-    //type - fill
-    await userName.fill("");
-    await userName.fill("rahulshettyacademy");
+  await page.goto('https://rahulshettyacademy.com/client');
+  await userEmailInput.fill('rahulshetty@gmail.com');
+  await userPasswordInput.type('Iamking@000');
+  await loginButton.click();
 });
