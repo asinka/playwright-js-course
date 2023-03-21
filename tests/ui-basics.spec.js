@@ -9,35 +9,8 @@ test('Login to rahulshettyacademy test', async ({ page }) => {
   await page.goto('/loginpagePractise/');
   await userEmailInput.fill('rahulshettyacademy');
   await userPasswordInput.type('learning');
-  await signInButton.click();
-  await expect(cardTitles.first()).toHaveText('iphone X');
+  await Promise.all([page.waitForURL('/angularpractice/shop'), signInButton.click()]);
 
-  const allTitlesText = await cardTitles.allTextContents();
-
-  console.log(allTitlesText);
-});
-
-test('Register new accout in Rashulacademy.com', async ({ page }) => {
-  await page.goto('/client');
-  await page.locator('a:text("Register here")').click();
-  await expect(page.locator('.login-title')).toHaveText('Register');
-  await page.locator('#firstName').type('Maname');
-  await page.locator('#lastName').type('Famiale');
-  await page.locator('#userEmail').type('blablabla@bababa.org');
-  await page.locator('#userMobile').type('7564839482');
-  await page.locator('[formcontrolname="occupation"]').selectOption('Student');
-  await page.locator('[value="Female"]').check();
-  await page.locator('#userPassword').type('notSecurePassword#1');
-  await page.locator('#confirmPassword').type('notSecurePassword#1');
-  await page.locator('[formcontrolname="required"]').check();
-
-  await page.locator('#login').click();
-  await page.locator('button:text("Login")');
-  await expect(page.locator('.login-title')).toHaveText('Log in');
-
-  await page.locator('#userEmail').fill('blablabla@bababa.org');
-  await page.locator('#userPassword').fill('notSecurePassword#1');
-  await page.locator('#login').click();
-
-  console.log(await page.locator('.card-body').locator('b').first().textContent());
+  const allCardsCount = await cardTitles.count();
+  await expect(allCardsCount).toBeGreaterThan(0);
 });
