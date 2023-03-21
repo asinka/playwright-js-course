@@ -1,12 +1,16 @@
 const { test, expect } = require('@playwright/test');
 
 test('Login to rahulshettyacademy test', async ({ page }) => {
-  const userEmailInput = page.locator('[formcontrolname="userEmail"]');
-  const userPasswordInput = page.locator('[formcontrolname="userPassword"]');
-  const loginButton = page.locator('[value="Login"]');
+  const userEmailInput = page.locator('#username');
+  const userPasswordInput = page.locator('[type="password"]');
+  const signInButton = page.locator('#signInBtn');
+  const cardTitles = page.locator('.card-body a');
 
-  await page.goto('https://rahulshettyacademy.com/client');
-  await userEmailInput.fill('rahulshetty@gmail.com');
-  await userPasswordInput.type('Iamking@000');
-  await loginButton.click();
+  await page.goto('/loginpagePractise/');
+  await userEmailInput.fill('rahulshettyacademy');
+  await userPasswordInput.type('learning');
+  await Promise.all([page.waitForURL('/angularpractice/shop'), signInButton.click()]);
+
+  const allCardsCount = await cardTitles.count();
+  await expect(allCardsCount).toBeGreaterThan(0);
 });
