@@ -14,3 +14,12 @@ test('Login to rahulshettyacademy test', async ({ page }) => {
   const allCardsCount = await cardTitles.count();
   await expect(allCardsCount).toBeGreaterThan(0);
 });
+
+test('UI controls', async ({ page }) => {
+  await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
+  const userName = page.locator('#username');
+  const signin = page.locator('#signInBtn');
+  const dropdown = page.locator('select.form-control');
+  await dropdown.selectOption('consult');
+  await page.pause();
+});
