@@ -16,7 +16,7 @@
   },
   "homepage": "https://github.com/asinka/playwright-js-course#readme",
   "devDependencies": {
-    "@playwright/test": "^1.31.2",
+    "@playwright/test": "^1.53.1",
     "prettier": "2.8.2"
   }
 }
