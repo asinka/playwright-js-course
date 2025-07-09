@@ -53,7 +53,7 @@ test('Register', async ({ page }) => {
   await expect(page.locator('.card-body').first()).toBeVisible();
 });
 
-test.only('Child windows handle', async ({ browser }) => {
+test('Child windows handle', async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
   await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
@@ -62,12 +62,6 @@ test.only('Child windows handle', async ({ browser }) => {
 
   await documentLink.click();
   const newPage = await newPagePromise;
-  
-  // await page.goto('/client');
-  // const user = {
-  //   email: 'Freda_Boyle70@hotmail.com',
-  //   password: '6fn55_M76rzrON5',
-  // }
-  // const loginPage = new LoginPage(page);
-  // await loginPage.login(user);
+  const text = await newPage.locator('.red').textContent();
+  await expect(text).not.toBeUndefined();
 });

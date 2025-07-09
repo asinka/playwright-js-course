@@ -1,4 +1,4 @@
-const { test, expect } = require('@playwright/test');
+import { test, expect } from '@playwright/test';
 
 test('Login and check header of first card', async ({ page }) => {
   await page.goto('/client');
