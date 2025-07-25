@@ -1,17 +1,18 @@
-import { test, expect } from '@playwright/test';
+import { expect } from '@playwright/test';
+import { test } from '../fixtures/fixtures'
 import { RegisterPage } from '../pages/RegisterPage';
 import { faker } from '@faker-js/faker';
 import { LoginPage } from '../pages/LoginPage';
 
-test('Login to rahulshettyacademy test', async ({ page }) => {
+test('Login to rahulshettyacademy test', async ({ page, users }) => {
   const userEmailInput = page.locator('#username');
   const userPasswordInput = page.locator('[type="password"]');
   const signInButton = page.locator('#signInBtn');
   const cardTitles = page.locator('.card-body a');
 
   await page.goto('/loginpagePractise/');
-  await userEmailInput.fill('rahulshettyacademy');
-  await userPasswordInput.fill('learning');
+  await userEmailInput.fill(users['user1'].username);
+  await userPasswordInput.fill(users['user1'].password);
   await Promise.all([page.waitForURL('/angularpractice/shop'), signInButton.click()]);
 
   const allCardsCount = await cardTitles.count();
